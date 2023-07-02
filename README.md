@@ -1,2 +1,2 @@
-## Dfa matcher for regular expression (a + bc)*
-### Run tests `./test/test.sh`
+### Dfa for the regular expression `(a + bc)*`
+Build & run tests tests `./test/test.sh`
