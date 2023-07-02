@@ -55,7 +55,7 @@ class Dfa {
 
 
     /**
-     * current state
+     * Current state
     */
     State *current;
 
@@ -79,7 +79,7 @@ public:
     }
 
     /**
-     * dfa destructor free states memory allocation
+     * Dfa destructor free states memory allocation
     */
     ~Dfa(){
         delete q0;
@@ -88,7 +88,7 @@ public:
     }
 
     /**
-     * read input function
+     * Read input function
     */
     bool read(const std::string& input){
         current = q0;
