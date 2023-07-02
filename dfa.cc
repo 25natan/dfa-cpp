@@ -103,8 +103,7 @@ public:
 
 int main() {
     std::string input;
-    std::cout << "Please enter a string to test against regular expression (a + bc)*: ";
     std::cin >> input;
-    std::cout << "Test result: " << std::boolalpha << Dfa().read(input) << std::endl;
+    std::cout << std::boolalpha << Dfa().read(input);
     return 0;
 }
