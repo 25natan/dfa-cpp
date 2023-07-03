@@ -90,20 +90,40 @@ public:
     /**
      * Read input function
     */
-    bool read(const std::string& input){
+    bool read(const std::string& input, bool log = false){
         current = q0;
         for(const char c: input) {
-            if(alphabet.find(c) == alphabet.end())
+            if(alphabet.find(c) == alphabet.end()) {
+                // Log not in alphabet error on logging mode
+                if(log) {
+                    std::cout << "Character " << c << " is not in alphabet, exiting..." << std::endl;
+                }
                 return false;
-            current = lambda[{ current, c }];
+            }
+            State* next = lambda[{ current, c }];
+
+            // Log states, characters and movement on logging mode
+            if(log) {
+                std::cout << "In state: " << current->name << std::endl
+                    << "Reading character: " << c << std::endl
+                    << "Moving to state: " << next->name << std::endl << std::endl;
+            }
+            current = next;
         }
-        return current->isAccepting;
+
+        // Log final status on loggin mode
+        if(log) {
+            std::string finalStatus = current->isAccepting ? "accepted" : "rejected";
+            std::cout << "String " << input << " is " <<  finalStatus << " by the automata" << std::endl;
+        }
+        return current->isAccepting; 
     }
 };
 
-int main() {
+int main(int argc, char* argv[]) {
+    bool log = argc > 1 && argv[1] == std::string("--log");
     std::string input;
     std::cin >> input;
-    std::cout << std::boolalpha << Dfa().read(input);
+    std::cout << std::boolalpha << Dfa().read(input, log);
     return 0;
 }
